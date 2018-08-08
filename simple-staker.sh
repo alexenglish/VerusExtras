@@ -12,6 +12,7 @@
 #or add the full path of the script to your VRSC.conf file
 #using the parameter blocknotify=<path>
 #The script needs to be run multiple times to carry funds forward through the two steps to go from block reward to staking. Recommended options are to run on a cron job every 3 to 5 minutes, or to run when new blocks are added using the blocknotify parameter to verusd as mentioned above. 
+#The blocknotify method is not recommended if you are not yet synced to the chain - make sure you're in sync, or close to it before setting this up with blocknotify
 
 #Path to the verus RPC client
 VERUS=~/veruscoin/src/fiat/verus
