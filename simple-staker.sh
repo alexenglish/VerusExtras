@@ -34,6 +34,11 @@ if [ $? -eq 127 ]; then
     exit 1
 fi
 
+if [ ! -x $VERUS ]; then
+        echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 3 to reflect an accurate path to the Verus CLI RPC executable."
+        exit 1
+fi
+
 HEIGHT=$($VERUS getblockcount)
 if [ $X -ne 0 ]; then
     if [ $((HEIGHT % X)) -ne 0 ]; then
