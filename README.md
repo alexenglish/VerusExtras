@@ -20,5 +20,11 @@ Send funds to the specified address in separate transactions of the desired size
 ## decodeunlockheight.py
 Takes the script hex for a timelocked transaction and returns the block number at which that TX will unlock.
 
+## fetchtx.sh
+Takes a TXID as the first argument and returns full TX data, including for transactions that aren't associated with addresses in the local wallet. This is just a wrapper for RPC functions.
+
+## fetchutxos.sh
+Takes an address as the first argument and returns all UTXOs for that address. Just used to simplify syntax of the corresponding RPC call.
+
 ## Misc Notes
 If you're working with wallet files, particularly dumps containing plain-text private keys, I highly recommend [tomb](https://www.dyne.org/software/tomb/) for keeping your work safe.
