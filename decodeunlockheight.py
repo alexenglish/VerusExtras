@@ -10,18 +10,14 @@
 #Prints 839041 to standard output
 
 import sys
+
 script=sys.argv[1]
 heightbytes=script[6:8]
-
-#print "Bytes: " + heightbytes
 
 heighthex = ''
 
 for count in range(1, int(heightbytes,16)+1):
     offset=6+2*count
     heighthex=script[offset:(offset+2)] + heighthex
-    #print "Count: "+str(count)+" Offset: "+str(offset)+" Hex: "+heighthex
 
-height=int(heighthex,16)
-
-print height
+print int(heighthex,16)
