@@ -7,7 +7,7 @@
 #There is NO ERROR CHECKING - this assumes well-formed input
 
 #Example use - ./decodeunlockheight.py 6a2a010381cd0cb1752103a6c289dbed0e8dce5c90109989a6443f7ad990facc0ec5db58576c48cb5b5c36ac
-#Produces 839041 
+#Prints 839041 to standard output
 
 import sys
 script=sys.argv[1]
