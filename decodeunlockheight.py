@@ -20,4 +20,4 @@ for count in range(1, int(heightbytes,16)+1):
     offset=6+2*count
     heighthex=script[offset:(offset+2)] + heighthex
 
-print int(heighthex,16)
+print (int(heighthex,16))
