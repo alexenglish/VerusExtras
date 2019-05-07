@@ -19,6 +19,13 @@ if [ ! -x $VERUS ]; then
         exit 1
 fi
 
+#Check for bc dependency
+bc --version &> /dev/null
+if [ $? -eq 127 ]; then
+    echo "Please install bc (a command-line calculator)"
+    exit 1
+fi
+
 ######Recipient
 RCPT=$1
 #test for correct length of recipient address string
