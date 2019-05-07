@@ -9,7 +9,7 @@ See comments at the top of each script for usage information.
 Simple staker shields coinbases to a private address, then moves available private address balances to public addresses (randomly selected from those available, creating new addresses if necessary) for staking. This script can be run manually, set up as a cron job, or used with the blocknotify parameter to execute every X blocks (not recommended if you're still syncing the chain).
 
 ## verus-completion.bash
-Gives tab-completion for the verus cli rpc. At the moment it only auto-completes commands, but I intend to add support for a few dynamic types. To make use of it run `source verus-completion.bash` in your shell, or add that to your .bashrc (you may have to adjust paths).
+Gives tab-completion for the verus and komodo-cli RPC commands. At the moment it only auto-completes commands, but I intend to add support for a few dynamic types. To make use of it run `source verus-completion.bash` in your shell, or add that to your .bashrc (you may have to adjust paths).
 
 ## sendmessage.sh
 Sendmessage will send an encrypted private message using the memo field of a private transaction. It costs a fee to send, and sends a small amount of Verus to the receipient, both of these amounts are configurable.
