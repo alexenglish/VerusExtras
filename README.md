@@ -29,5 +29,8 @@ Takes a TXID as the first argument and returns full TX data, including for trans
 ## fetchutxos.sh
 Takes an address as the first argument and returns all UTXOs for that address. Just used to simplify syntax of the corresponding RPC call.
 
+## getVRSCprice.sh
+Fetches the crurent CoinGecko VRSC price. Takes an optional argument for the currency to get the price in, or `list` to get a list of supported currencies. Defaults to USD.
+
 ## Misc Notes
 If you're working with wallet files, particularly dumps containing plain-text private keys, I highly recommend [tomb](https://www.dyne.org/software/tomb/) for keeping your work safe.
