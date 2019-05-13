@@ -35,5 +35,8 @@ Takes an address as the first argument and returns all UTXOs for that address. J
 ## getVRSCprice.sh
 Fetches the crurent CoinGecko VRSC price. Takes an optional argument for the currency to get the price in, or `list` to get a list of supported currencies. Defaults to USD.
 
+## fetchbootstrap.sh
+Fetch a recent bootstrap file with blockchain data to get up and running quickly on a new install or fix a broken instance without re-syncing the whole chain.
+
 ## Misc Notes
 If you're working with wallet files, particularly dumps containing plain-text private keys, I highly recommend [tomb](https://www.dyne.org/software/tomb/) for keeping your work safe.
