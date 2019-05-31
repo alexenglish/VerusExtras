@@ -4,7 +4,7 @@
 #Tested on Ubuntu 16.04, 17.10, 18.04
 #Make sure you have a correct path set for the verus cli
 
-VERUS=~/veruscoin/src/fiat/verus
+VERUS=~/verus-cli/verus
 
 function usage {
     echo "Usage: ./sendmessage.bash <RECEIVING ADDRESS> <MESSAGE> (AMOUNT TO SEND) (FEE) (FROM ADDRESS)"
@@ -77,9 +77,9 @@ if [ $# -ge 5 ]; then
     FROM=$5
 else
     #get the first from address that has a balance large enough for the transaction
-    ZADDRS=$(fiat/verus z_listaddresses | tr -d '[]",')
+    ZADDRS=$($VERUS z_listaddresses | tr -d '[]",')
     for Z in $ZADDRS; do
-        B=$(fiat/verus z_getbalance $Z)
+        B=$($VERUS z_getbalance $Z)
         if [ "$(bc<<<"($B-$AMT-$FEE)>=0")" -eq 1 ]; then
             FROM=$Z
             break

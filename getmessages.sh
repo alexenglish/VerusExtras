@@ -6,7 +6,7 @@
 
 #This script will list all received memos (messages) for the supplied address.
 
-VERUS=~/veruscoin/src/fiat/verus
+VERUS=~/verus-cli/verus
 
 if [ ! -x $VERUS ]; then
         echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 3 to reflect an accurate path to the Verus CLI RPC executable."

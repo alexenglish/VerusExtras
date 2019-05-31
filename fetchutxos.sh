@@ -14,4 +14,4 @@ if [ ! -x $VERUS ]; then
     exit 1
 fi
 
-../fiat/verus getaddressutxos '{"addresses": ["'$1'"]}'
+$VERUS getaddressutxos '{"addresses": ["'$1'"]}'

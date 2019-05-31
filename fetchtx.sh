@@ -14,4 +14,4 @@ if [ ! -x $VERUS ]; then
     exit 1
 fi
 
-../fiat/verus decoderawtransaction "$(../fiat/verus getrawtransaction "$1")"
+$VERUS decoderawtransaction "$($VERUS getrawtransaction "$1")"

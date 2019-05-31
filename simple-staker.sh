@@ -15,7 +15,7 @@
 #The blocknotify method is not recommended if you are not yet synced to the chain - make sure you're in sync, or close to it before setting this up with blocknotify
 
 #Path to the verus RPC client
-VERUS=~/veruscoin/src/fiat/verus
+VERUS=~/verus-cli/verus
 
 #Desired target size for stakes
 #smaller amounts will stake in full each time
