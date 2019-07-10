@@ -11,7 +11,7 @@
 #You can execute it manually whenever you want,
 #or add the full path of the script to your VRSC.conf file
 #using the parameter blocknotify=<path>
-#The script needs to be run multiple times to carry funds forward through the two steps to go from block reward to staking. Recommended options are to run on a cron job every 3 to 5 minutes, or to run when new blocks are added using the blocknotify parameter to verusd as mentioned above. 
+#The script needs to be run multiple times to carry funds forward through the two steps to go from block reward to staking. Recommended options are to run on a cron job every 3 to 5 minutes, or to run when new blocks are added using the blocknotify parameter to verusd as mentioned above.
 #The blocknotify method is not recommended if you are not yet synced to the chain - make sure you're in sync, or close to it before setting this up with blocknotify
 
 #Path to the verus RPC client
@@ -65,14 +65,14 @@ if [ -z "$CB" ]; then
     exit 1
 fi
 
-if [ $(bc<<<"$CB > 0") -gt 0 ]; then 
+if [ $(bc<<<"$CB > 0") -gt 0 ]; then
     echo "*******************************************************"
     echo "          Auto-shielding $CB Coinbases"
     #echo "Setting tx fee to $TX_FEE"
     $VERUS settxfee $TX_FEE > /dev/null
 
     #echo "Fetching first z_address"
-    ZADDR=$($VERUS z_listaddresses | grep '"' | tr -d '",' | head -n 1)
+    ZADDR=$($VERUS z_listaddresses | grep '"' | tr -d '", ' | head -n 1)
 
     if [ -z "$ZADDR" ]; then
         #there were none, make one
@@ -102,7 +102,7 @@ if [ $(bc<<<"$ZB > $TX_FEE") -gt 0 ]; then
     $VERUS settxfee $TX_FEE > /dev/null
 
     declare -a ADDR
-    readarray -t ADDR < <($VERUS getaddressesbyaccount "" | sed -e '1d' -e '$d' | tr -d ' ",' | sort -R) 
+    readarray -t ADDR < <($VERUS getaddressesbyaccount "" | sed -e '1d' -e '$d' | tr -d ' ",' | sort -R)
 
     #for each z_address
     for Z in $($VERUS z_listaddresses | grep '"' | tr -d '",' | head -n 1); do
@@ -151,7 +151,7 @@ if [ $(bc<<<"$ZB > $TX_FEE") -gt 0 ]; then
         done
 
         #submit TX
-        if [ -n "$SENDS" ]; then 
+        if [ -n "$SENDS" ]; then
             SENDS="[${SENDS%,}]"
             echo "z_sendmany \"$Z\" \"$SENDS\""
             $VERUS z_sendmany "$Z" "$SENDS"
