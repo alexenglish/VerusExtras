@@ -38,5 +38,8 @@ Fetches the crurent CoinGecko VRSC price. Takes an optional argument for the cur
 ## fetchbootstrap.sh
 Fetch a recent bootstrap file with blockchain data to get up and running quickly on a new install or fix a broken instance without re-syncing the whole chain.
 
+## VRSC-bootstrap-win.bat
+Download, checksum-verify and extract VRSC bootstrap to its standard location in Windows. This file uses native windows command line instructions only, no 3rd party tool needed.
+
 ## Misc Notes
 If you're working with wallet files, particularly dumps containing plain-text private keys, I highly recommend [tomb](https://www.dyne.org/software/tomb/) for keeping your work safe.
