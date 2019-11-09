@@ -13,4 +13,4 @@ if ! command -v jq > /dev/null ; then
 	exit 1
 fi
 
-$VERUS listunspent 0 999999999 | jq -cr '.[]|[.address,.amount]' | tr -d '[]"' | tr ',' "\t" | awk '{x[$1]+=$2} END {for (key in x) { print key ": " x[key] }}'
+$VERUS listunspent 0 999999999 | jq -cr '.[]|[.address,.amount]' | tr -d '[]"' | tr ',' "\t" | awk '{x[$1]+=$2} END {for (key in x) { print key "\t" x[key] }}'
