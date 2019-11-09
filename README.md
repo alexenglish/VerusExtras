@@ -5,6 +5,8 @@ All of these scripts have been at least lightly tested, but come with no warrant
 
 See comments at the top of each script for usage information.
 
+Update the config file (named 'config') with the path to your Verus CLI RPC executable. Some scripts depend on bc (command-line calculator) or jq (command-line json parser, constructor, pretty-printer).
+
 ## simple-staker.sh
 Simple staker shields coinbases to a private address, then moves available private address balances to public addresses (randomly selected from those available, creating new addresses if necessary) for staking. This script can be run manually, set up as a cron job, or used with the blocknotify parameter to execute every X blocks (not recommended if you're still syncing the chain).
 
@@ -37,6 +39,9 @@ Fetches the crurent CoinGecko VRSC price. Takes an optional argument for the cur
 
 ## fetchbootstrap.sh
 Fetch a recent bootstrap file with blockchain data to get up and running quickly on a new install or fix a broken instance without re-syncing the whole chain.
+
+## listaddressbalances.sh
+List the balance for all addresses that have one, as determined through results of listunspent from the RPC. Tab delimited for easy use in scripting. 
 
 ## Misc Notes
 If you're working with wallet files, particularly dumps containing plain-text private keys, I highly recommend [tomb](https://www.dyne.org/software/tomb/) for keeping your work safe.
