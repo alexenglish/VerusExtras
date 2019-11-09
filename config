@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#source this file in other scripts to set up common variables
+
+#path to verus CLI rpc executable
+VERUS=~/verus-cli/verus
