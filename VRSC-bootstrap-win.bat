@@ -1,4 +1,15 @@
 @Echo off
+rem Copyright Frank van den Brink Ocober 2019
+rem Released under MIT license
+rem This script comes with no warranty whatsoever. Use at your own risk.
+rem Tested on windows 10 Pro version 1709 build 16299.125 
+
+rem This script downloads the bootstrap and its sha256sum hash file, compares it
+rem and if validated checks if Verus daemon is not running. If not running it extracts
+rem the bootstrap to the standard chain location on disk.
+
+rem This script only uses OS native commands, without any external dependencies.
+
 @call :GET_CURRENT_DIR
 @cd %THIS_DIR%
 cls

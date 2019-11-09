@@ -1,4 +1,14 @@
 #!/bin/bash
+#Copyright Frank van den Brink Ocober 2019
+#Released under MIT license
+#This script comes with no warranty whatsoever. Use at your own risk.
+#Tested on Ubuntu 18.04
+
+#This script downloads the bootstrap and its sha256sum hash file, compares it
+#and if validated checks if Verus daemon is not running. If not running it extracts
+#the bootstrap to the standard chain location on disk.
+
+#This script only uses OS native commands, without any external dependencies.
 
 cd ~
 mkdir ~/bootstrap
@@ -87,4 +97,3 @@ echo "*******************************************************************"
 cd ~/.komodo/VRSC
 tar -xf ~/bootstrap/VRSC-bootstrap.tar.gz
 rm -R ~/bootstrap
-
