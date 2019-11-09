@@ -5,7 +5,7 @@ All of these scripts have been at least lightly tested, but come with no warrant
 
 See comments at the top of each script for usage information.
 
-Update the config file (named 'config') with the path to your Verus CLI RPC executable. Some scripts depend on bc (command-line calculator) or jq (command-line json parser, constructor, pretty-printer).
+Update the config file (named 'config') with the path to your Verus CLI RPC executable. Some scripts depend on bc (command-line calculator), jq (command-line json parser, constructor, pretty-printer), or xxd (command-line hex-dumps and reverse hex-dumps).
 
 ## simple-staker.sh
 Simple staker shields coinbases to a private address, then moves available private address balances to public addresses (randomly selected from those available, creating new addresses if necessary) for staking. This script can be run manually, set up as a cron job, or used with the blocknotify parameter to execute every X blocks (not recommended if you're still syncing the chain).
