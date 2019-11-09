@@ -7,11 +7,8 @@
 #fetch UTXOs for an address - this is just a wrapper for the getaddressutxos command to sipmlify the syntax
 #pass an address as the first and only argument
 
-VERUS=~/verus-cli/verus
+source config
 
-if [ ! -x $VERUS ]; then
-    echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 6 to reflect an accurate path to the Verus CLI RPC executable."
-    exit 1
-fi
+#need to add error checking to make sure we have exactly one address
 
 $VERUS getaddressutxos '{"addresses": ["'$1'"]}'

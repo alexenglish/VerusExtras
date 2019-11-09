@@ -14,8 +14,7 @@
 #The script needs to be run multiple times to carry funds forward through the two steps to go from block reward to staking. Recommended options are to run on a cron job every 3 to 5 minutes, or to run when new blocks are added using the blocknotify parameter to verusd as mentioned above. 
 #The blocknotify method is not recommended if you are not yet synced to the chain - make sure you're in sync, or close to it before setting this up with blocknotify
 
-#Path to the verus RPC client
-VERUS=~/verus-cli/verus
+source config
 
 #Desired target size for stakes
 #smaller amounts will stake in full each time
@@ -33,11 +32,6 @@ bc --version &> /dev/null
 if [ $? -eq 127 ]; then
     echo "Please install bc (a command-line calculator)"
     exit 1
-fi
-
-if [ ! -x $VERUS ]; then
-        echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 3 to reflect an accurate path to the Verus CLI RPC executable."
-        exit 1
 fi
 
 HEIGHT=$($VERUS getblockcount)

@@ -7,11 +7,6 @@
 #fetch complete transaction data for the given TXID passed as first and only argument
 #There didn't seem to be a way to get this directly for all transactions, so this wraps a couple RPC calls together to get it.
 
-VERUS=~/verus-cli/verus
-
-if [ ! -x $VERUS ]; then
-    echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 6 to reflect an accurate path to the Verus CLI RPC executable."
-    exit 1
-fi
+source config
 
 $VERUS decoderawtransaction "$($VERUS getrawtransaction "$1")"

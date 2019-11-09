@@ -11,12 +11,7 @@
 #Second arg - amount to send
 #Third arg - size of chunks - defaults to 1000 if not set
 
-VERUS=~/verus-cli/verus
-
-if [ ! -x $VERUS ]; then
-    echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 6 to reflect an accurate path to the Verus CLI RPC executable."
-    exit 1
-fi
+source config
 
 #Check for bc dependency
 bc --version &> /dev/null

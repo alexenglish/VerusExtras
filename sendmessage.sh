@@ -4,7 +4,7 @@
 #Tested on Ubuntu 16.04, 17.10, 18.04
 #Make sure you have a correct path set for the verus cli
 
-VERUS=~/verus-cli/verus
+source config
 
 function usage {
     echo "Usage: ./sendmessage.bash <RECEIVING ADDRESS> <MESSAGE> (AMOUNT TO SEND) (FEE) (FROM ADDRESS)"
@@ -13,11 +13,6 @@ function usage {
     echo "Default from address is the first z-address with sufficient funds, if present."
     echo "Addresses must be z-addresses"
 }
-
-if [ ! -x $VERUS ]; then
-        echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 3 to reflect an accurate path to the Verus CLI RPC executable."
-        exit 1
-fi
 
 #Check for bc dependency
 bc --version &> /dev/null
