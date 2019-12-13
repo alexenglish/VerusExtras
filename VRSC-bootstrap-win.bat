@@ -2,7 +2,7 @@
 rem Copyright Frank van den Brink Ocober 2019
 rem Released under MIT license
 rem This script comes with no warranty whatsoever. Use at your own risk.
-rem Tested on windows 10 Pro version 1709 build 16299.125 
+rem Tested on windows 10 Pro version 1709 build 16299.125
 
 rem This script downloads the bootstrap and its sha256sum hash file, compares it
 rem and if validated checks if Verus daemon is not running. If not running it extracts
@@ -36,8 +36,8 @@ Echo ***                                                             ***
 Echo *******************************************************************
 
 cd %THIS_DIR%
-bitsadmin /transfer BOOTSTRAP /download /priority foreground https://bootstrap.0x03.services/veruscoin/VRSC-bootstrap.tar.gz %THIS_DIR%\VRSC-bootstrap.tar.gz
-bitsadmin /transfer CHECKSUM /download /priority foreground https://bootstrap.0x03.services/veruscoin/VRSC-bootstrap.tar.gz.sha256sum %THIS_DIR%\VRSC-bootstrap.tar.gz.sha256sum
+bitsadmin /transfer BOOTSTRAP /download /priority foreground https://bootstrap.veruscoin.io/veruscoin/VRSC-bootstrap.tar.gz %THIS_DIR%\VRSC-bootstrap.tar.gz
+bitsadmin /transfer CHECKSUM /download /priority foreground https://bootstrap.veruscoin.io/veruscoin/VRSC-bootstrap.tar.gz.sha256sum %THIS_DIR%\VRSC-bootstrap.tar.gz.sha256sum
 
 cls
 Echo *******************************************************************
