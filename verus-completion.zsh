@@ -3,6 +3,8 @@
 #This script comes with no warranty whatsoever. Use at your own risk.
 #Tested on Ubuntu 18.04
 
+pushd "$( dirname "${BASH_SOURCE[0]}" )" 
+
 #source this file in your .zshrc or run "source verus-completion.zsh" from your zsh shell
 
 source completion_vars
@@ -13,3 +15,5 @@ function _verus {
 
 compdef _verus verus
 compdef _verus komodo-cli
+
+popd
