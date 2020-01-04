@@ -8,6 +8,11 @@
 #Usage: ./stakepusher.sh [false]
 #1st arg is either "false" or anything else (or omitted). Unless false is given, a delay is used between addresses to increase privacy. If false is passed, all actions will be performed without delay, finishing quickly, but also creating the possibility of correlating the addresses based on time.
 
+if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
+    echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
+    exit 1
+fi
+
 #Dependencies: jq (command-line json parser/editor), bc (command-line calculator)
 if ! command -v jq &>/dev/null ; then
     echo "jq not found. please install using your package manager."
@@ -18,8 +23,6 @@ if ! command -v bc &>/dev/null ; then
     echo "bc not found. please install using your package manager."
     exit 1
 fi
-
-source config
 
 DB=$(mktemp -d)
 

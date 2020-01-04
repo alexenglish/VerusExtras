@@ -11,7 +11,10 @@
 #Second arg - amount to send
 #Third arg - size of chunks - defaults to 2500 if not set
 
-source config
+if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
+    echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
+    exit 1
+fi
 
 #Check for bc dependency
 if ! command -v bc &> /dev/null ; then

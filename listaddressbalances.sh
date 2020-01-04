@@ -5,7 +5,10 @@
 #Tested on Ubuntu 17.10
 
 #lists balances for each address that has any unspent transactions
-source config
+if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
+    echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
+    exit 1
+fi
 
 #depends on jq
 if ! command -v jq > /dev/null ; then

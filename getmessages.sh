@@ -6,7 +6,10 @@
 
 #This script will list all received memos (messages) for the supplied address.
 
-source config
+if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
+    echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
+    exit 1
+fi
 
 #Check for xxd dependency
 if ! command -v xxd &> /dev/null ; then

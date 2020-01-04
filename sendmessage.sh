@@ -4,7 +4,10 @@
 #Tested on Ubuntu 16.04, 17.10, 18.04
 #Make sure you have a correct path set for the verus cli
 
-source config
+if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
+    echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
+    exit 1
+fi
 
 function usage {
     echo "Usage: ./sendmessage.bash <RECEIVING ADDRESS> <MESSAGE> (AMOUNT TO SEND) (FEE) (FROM ADDRESS)"
