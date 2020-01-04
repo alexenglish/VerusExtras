@@ -15,8 +15,7 @@ function usage {
 }
 
 #Check for bc dependency
-bc --version &> /dev/null
-if [ $? -eq 127 ]; then
+if ! command -v bc &> /dev/null ; then
     echo "Please install bc (a command-line calculator)"
     exit 1
 fi
@@ -56,7 +55,7 @@ if [ $# -ge 3 ]; then
 fi
 
 ######Fee
-FEE=0.0001
+FEE=$DEFAULT_FEE
 if [ $# -ge 4 ]; then
     FEE=$4
 fi
