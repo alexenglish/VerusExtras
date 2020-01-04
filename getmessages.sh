@@ -9,8 +9,7 @@
 source config
 
 #Check for xxd dependency
-xxd --version &> /dev/null
-if [ $? -eq 127 ]; then
+if ! command -v xxd &> /dev/null ; then
     echo "Please install xxd (a command-line hex-editor)"
     exit 1
 fi
