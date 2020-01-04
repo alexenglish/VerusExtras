@@ -9,13 +9,12 @@
 
 #First arg - address to send to
 #Second arg - amount to send
-#Third arg - size of chunks - defaults to 1000 if not set
+#Third arg - size of chunks - defaults to 2500 if not set
 
 source config
 
 #Check for bc dependency
-bc --version &> /dev/null
-if [ $? -eq 127 ]; then
+if ! command -v bc &> /dev/null ; then
     echo "Please install bc (a command-line calculator)"
     exit 1
 fi
@@ -41,7 +40,7 @@ fi
 
 CHUNK=$3
 #set a default value if CHUNK is null
-CHUNK=${CHUNK:-1000}
+CHUNK=${CHUNK:-2500}
 
 SENT=0
 
