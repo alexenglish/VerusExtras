@@ -44,7 +44,9 @@ List the balance for all addresses that have one, as determined through results 
 Finds unspent minted (staked) coinbases and spends them forward to the same address to allow them to stake. Preserves privacy by not comingling addresses, and optionally allows the use of a delay to reduce the chances of time-correlation.
 
 ## integratedbalance.sh
-Presents a nicely structured and pretty-printed json output of current balance information, combining the output of getwalletinfo and z_gettotalbalance to present these balances: transparent, unconfirmed, immature, private, and total (all combined). I have this set as an entry in my .profile on a number of staking systems so the balance is presented on login.
+Presents a nicely structured and pretty-printed json output of current balance information, combining the output of getwalletinfo and z_gettotalbalance to present these balances: transparent, unconfirmed, immature, private, and total (all combined). Also presents private balance as a number, rather than text, unlike z_gettotalbalance.
+
+I have this set as an entry in my .profile on a number of staking systems so the balance is presented on login.
 
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
