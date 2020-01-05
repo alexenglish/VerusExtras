@@ -23,6 +23,12 @@ if ! command -v bc &> /dev/null ; then
     exit 1
 fi
 
+#Check for xxd dependency
+if ! command -v xxd &> /dev/null ; then
+    echo "Please install xxd (a command-line hex-editor)"
+    exit 1
+fi
+
 ######Recipient
 RCPT=$1
 #test for correct length of recipient address string
