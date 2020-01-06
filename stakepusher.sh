@@ -7,6 +7,7 @@
 
 #Usage: ./stakepusher.sh [false]
 #1st arg is either "false" or anything else (or omitted). Unless false is given, a delay is used between addresses to increase privacy. If false is passed, all actions will be performed without delay, finishing quickly, but also creating the possibility of correlating the addresses based on time.
+#You might also consider setting this up as a cronjob to execute automatically
 
 if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
     echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
@@ -96,4 +97,4 @@ done
 
 rm -rf "$DB"
 
-echo "Stake push complted"
+echo "Stake push completed"
