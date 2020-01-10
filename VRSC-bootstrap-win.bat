@@ -1,5 +1,5 @@
 @Echo off
-rem Copyright Frank van den Brink Ocober 2019
+rem Copyright Frank van den Brink October 2019
 rem Released under MIT license
 rem This script comes with no warranty whatsoever. Use at your own risk.
 rem Tested on windows 10 Pro version 1709 build 16299.125
@@ -11,7 +11,6 @@ rem the bootstrap to the standard chain location on disk.
 rem This script only uses OS native commands, without any external dependencies.
 
 @call :GET_CURRENT_DIR
-@cd %THIS_DIR%
 cls
 Echo *******************************************************************
 Echo ***                                                             ***
@@ -24,7 +23,9 @@ Echo *** and removes the bootstrap archives to free drive space      ***
 Echo ***                                                             ***
 Echo *******************************************************************
 Echo ***                                                             ***
-Echo ***   Please make sure Agama.exe or Verus-CLI is NOT running    ***
+Echo ***   Please make sure Agama, Verus Desktop or Verus-CLI        ***
+Echo ***                                                             ***
+Echo ***                       is NOT running                        ***
 Echo ***                                                             ***
 Echo *******************************************************************
 pause
@@ -35,9 +36,9 @@ Echo ***                    downloading files                        ***
 Echo ***                                                             ***
 Echo *******************************************************************
 
-cd %THIS_DIR%
-bitsadmin /transfer BOOTSTRAP /download /priority foreground https://bootstrap.veruscoin.io/veruscoin/VRSC-bootstrap.tar.gz %THIS_DIR%\VRSC-bootstrap.tar.gz
-bitsadmin /transfer CHECKSUM /download /priority foreground https://bootstrap.veruscoin.io/veruscoin/VRSC-bootstrap.tar.gz.sha256sum %THIS_DIR%\VRSC-bootstrap.tar.gz.sha256sum
+cd %Appdata%/komodo/VRSC
+bitsadmin /transfer BOOTSTRAP /download /priority foreground https://bootstrap.veruscoin.io/VRSC-bootstrap.tar.gz %THIS_DIR%\VRSC-bootstrap.tar.gz
+bitsadmin /transfer CHECKSUM /download /priority foreground https://bootstrap.veruscoin.io/VRSC-bootstrap.tar.gz.sha256sum %THIS_DIR%\VRSC-bootstrap.tar.gz.sha256sum
 
 cls
 Echo *******************************************************************
@@ -93,11 +94,10 @@ Echo ***                   Extracting Bootstrap                      ***
 Echo ***                                                             ***
 Echo *******************************************************************
 
-cd %AppData%\Komodo\VRSC
-tar -xf %THIS_DIR%\VRSC-bootstrap.tar.gz
-del %THIS-DIR%\VRSC-bootstrap.tar.gz
-del %THIS-DIR%\VRSC-bootstrap.tar.gz.sha256
-del %THIS-DIR%\checksum.txt
+tar -xf %VRSC-bootstrap.tar.gz
+del VRSC-bootstrap.tar.gz
+del VRSC-bootstrap.tar.gz.sha256
+del checksum.txt
 
 goto :SUCCESS
 
@@ -134,4 +134,5 @@ Echo *******************************************************************
 goto :EOF
 
 :EOF
+cd %THIS_DIR%
 pause

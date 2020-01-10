@@ -36,8 +36,8 @@ echo "***                                                             ***"
 echo "*******************************************************************"
 
 
-curl -# -O https://bootstrap.veruscoin.io/veruscoin/VRSC-bootstrap.tar.gz
-curl -# -O https://bootstrap.veruscoin.io/veruscoin/VRSC-bootstrap.tar.gz.md5sum
+curl -# -O https://bootstrap.veruscoin.io/VRSC-bootstrap.tar.gz
+curl -# -O https://bootstrap.veruscoin.io/VRSC-bootstrap.tar.gz.md5sum
 
 clear
 echo "*******************************************************************"

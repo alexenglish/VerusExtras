@@ -36,8 +36,8 @@ echo "***                                                             ***"
 echo "*******************************************************************"
 
 
-wget --progress=dot:mega --continue --retry-connrefused --waitretry=3 --timeout=30 https://bootstrap.veruscoin.io/veruscoin/VRSC-bootstrap.tar.gz
-wget --progress=dot:mega --continue --retry-connrefused --waitretry=3 --timeout=30 https://bootstrap.veruscoin.io/veruscoin/VRSC-bootstrap.tar.gz.sha256sum
+wget --progress=dot:mega --continue --retry-connrefused --waitretry=3 --timeout=30 https://bootstrap.veruscoin.io/VRSC-bootstrap.tar.gz
+wget --progress=dot:mega --continue --retry-connrefused --waitretry=3 --timeout=30 https://bootstrap.veruscoin.io/VRSC-bootstrap.tar.gz.sha256sum
 
 clear
 echo "*******************************************************************"
