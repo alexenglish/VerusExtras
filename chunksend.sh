@@ -2,7 +2,6 @@
 #Copyright Alex English September 2018
 #This script comes with no warranty whatsoever. Use at your own risk.
 #Tested on Ubuntu 17.10
-#Make sure you have a correct path set for the verus cli
 
 #This script will send funds to the specified address in separate transactions
 #This is useful if you'd like to manage the size of the UTXOs, such as for staking.
@@ -10,6 +9,7 @@
 #First arg - address to send to
 #Second arg - amount to send
 #Third arg - size of chunks - defaults to 2500 if not set
+DEFAULTCHUNK=5000
 
 if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
     echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
@@ -23,7 +23,7 @@ if ! command -v bc &> /dev/null ; then
 fi
 
 if [ "$#" -lt 2 ]; then
-    echo -e "Useage: ./chunksend.sh <ADDRESS> <AMOUNTTOSEND> (CHUNKSIZE)\nChunk size defaults to 1000"
+    echo -e "Useage: ./chunksend.sh <ADDRESS> <AMOUNTTOSEND> (CHUNKSIZE)\nChunk size defaults to $DEFAULTCHUNK"
     exit
 fi
 
@@ -43,7 +43,7 @@ fi
 
 CHUNK=$3
 #set a default value if CHUNK is null
-CHUNK=${CHUNK:-2500}
+CHUNK=${CHUNK:-$DEFAULTCHUNK}
 
 SENT=0
 
