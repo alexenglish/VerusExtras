@@ -23,7 +23,7 @@ if ! command -v bc &>/dev/null ; then
 fi
 
 WALLET="$($VERUS getwalletinfo | jq '{"transparent":.balance,"unconfirmed":.unconfirmed_balance,"immature":.immature_balance}')"
-WALLET="$WALLET$($VERUS z_gettotalbalance | jq '{"private":(.private|tonumber)}')"
+WALLET="$WALLET$($VERUS z_gettotalbalance 0 | jq '{"private":(.private|tonumber)}')"
 WALLET="$(jq -s add <<<"$WALLET")"
 TOTAL="$(jq '.transparent+.unconfirmed+.immature+.private' <<<"$WALLET")"
 WALLET="$(jq -s add <<<"$WALLET{\"total\":$TOTAL}")"
