@@ -4,7 +4,10 @@
 #Tested on Ubuntu 16.04, 17.10, 18.04
 #Make sure you have a correct path set for the verus cli
 
-VERUS=~/verus-cli/verus
+if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
+    echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
+    exit 1
+fi
 
 function usage {
     echo "Usage: ./sendmessage.bash <RECEIVING ADDRESS> <MESSAGE> (AMOUNT TO SEND) (FEE) (FROM ADDRESS)"
@@ -14,15 +17,15 @@ function usage {
     echo "Addresses must be z-addresses"
 }
 
-if [ ! -x $VERUS ]; then
-        echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 3 to reflect an accurate path to the Verus CLI RPC executable."
-        exit 1
+#Check for bc dependency
+if ! command -v bc &> /dev/null ; then
+    echo "Please install bc (a command-line calculator)"
+    exit 1
 fi
 
-#Check for bc dependency
-bc --version &> /dev/null
-if [ $? -eq 127 ]; then
-    echo "Please install bc (a command-line calculator)"
+#Check for xxd dependency
+if ! command -v xxd &> /dev/null ; then
+    echo "Please install xxd (a command-line hex-editor)"
     exit 1
 fi
 
@@ -61,7 +64,7 @@ if [ $# -ge 3 ]; then
 fi
 
 ######Fee
-FEE=0.0001
+FEE=$DEFAULT_FEE
 if [ $# -ge 4 ]; then
     FEE=$4
 fi

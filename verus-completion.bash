@@ -3,7 +3,12 @@
 #This script comes with no warranty whatsoever. Use at your own risk.
 #Tested on Ubuntu 18.04
 
+pushd "$( dirname "${BASH_SOURCE[0]}" )" 
+
 #source verus-completions.bash in your bash shell to make use of it. ( run "source verus-completions.bash" )
 #or source this file in your .bashrc file
+source completion_vars
 
-complete -W "getaddressbalance getaddressdeltas getaddressmempool getaddresstxids getaddressutxos getsnapshot coinsupply getbestblockhash getblock getblockchaininfo getblockcount getblockhash getblockhashes getblockheader getchaintips getdifficulty getmempoolinfo getrawmempool getspentinfo gettxout gettxoutproof gettxoutsetinfo kvsearch kvupdate minerids notaries verifychain verifytxoutproof getinfo help stop MoMoMdata assetchainproof calc_MoM getNotarisationsForBlock height_MoM migrate_completeimporttransaction migrate_converttoexport migrate_createimporttransaction scanNotarisationsDB blockHeight z_getpaymentdisclosure z_validatepaymentdisclosure generate numblocks getgenerate setgenerate getblocksubsidy getblocktemplate getlocalsolps getmininginfo getnetworkhashps getnetworksolps prioritisetransaction submitblock addnode clearbanned disconnectnode getaddednodeinfo getconnectioncount getdeprecationinfo getnettotals getnetworkinfo getpeerinfo listbanned ping setban createrawtransaction decoderawtransaction decodescript fundrawtransaction getrawtransaction sendrawtransaction signrawtransaction createmultisig estimatefee estimatepriority invalidateblock jumblr_deposit jumblr_pause jumblr_resume jumblr_secret reconsiderblock validateaddress verifymessage z_validateaddress addmultisigaddress backupwallet dumpprivkey dumpwallet encryptwallet getaccount getaccountaddress getaddressesbyaccount getbalance getnewaddress getrawchangeaddress getreceivedbyaccount getreceivedbyaddress gettransaction getunconfirmedbalance getwalletinfo importaddress importprivkey importwallet keypoolrefill listaccounts listaddressgroupings listlockunspent listreceivedbyaccount listreceivedbyaddress listsinceblock listtransactions listunspent lockunspent move resendwallettransactions sendfrom sendmany sendtoaddress setaccount settxfee signmessage z_exportkey z_exportviewingkey z_exportwallet z_getbalance z_getnewaddress z_getoperationresult z_getoperationstatus z_gettotalbalance z_importkey z_importviewingkey z_importwallet z_listaddresses z_listoperationids z_listreceivedbyaddress z_listunspent z_mergetoaddress z_sendmany z_shieldcoinbase zcbenchmark zcrawjoinsplit zcrawkeygen zcrawreceive zcsamplejoinsplit" verus komodo-cli
+complete -W "$CONTROL $NETWORK $BLOCKCHAIN $CROSSCHAIN $MINING $GENERATING $RAWTRANSACTIONS $ADDRESSINDEX $UTIL $HIDDEN $WALLET $DISCLOSURE $PBAAS" verus komodo-cli
+
+popd

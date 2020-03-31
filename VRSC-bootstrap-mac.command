@@ -1,5 +1,5 @@
 #!/bin/bash
-#Copyright Frank van den Brink Ocober 2019
+#Copyright Frank van den Brink February 2020
 #Released under MIT licence
 #This script comes with no warranty whatsoever. Use at your own risk.
 #Tested on Mac OS Mojave 10.14
@@ -17,10 +17,10 @@ clear
 echo "*******************************************************************"
 echo "***                                                             ***"
 echo "*** This script downloads the bootstrap and checksum files from ***"
-echo "***   https://bootstrap.0x03.services/veruscoin                 ***"
+echo "***   https://bootstrap.veruscoin.io                            ***"
 echo "*** and checks the download checksum for validity.              ***"
 echo "*** It automaticaly extracts the contents of the bootstrap to   ***"
-echo "***   ~/.komodo/VRSC                                            ***"
+echo "***   ~/Library/Application\ Support/Komodo/VRSC                ***"
 echo "*** and removes the bootstrap archives to free drive space      ***"
 echo "***                                                             ***"
 echo "*******************************************************************"

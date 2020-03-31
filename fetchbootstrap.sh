@@ -3,7 +3,7 @@
 wget &> /dev/null
 
 if [ "$?" -ne "127" ]; then
-    wget https://bootstrap.0x03.services/veruscoin/VRSC-bootstrap.tar.gz
+    wget https://bootstrap.veruscoin.io/VRSC-bootstrap.tar.gz
 else
-    curl https://bootstrap.0x03.services/veruscoin/VRSC-bootstrap.tar.gz > VRSC-bootstrap.tar.gz
+    curl https://bootstrap.veruscoin.io/VRSC-bootstrap.tar.gz
 fi

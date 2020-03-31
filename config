@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#source this file in other scripts to set up common variables
+
+#path to verus CLI rpc executable
+VERUS=~/verus-cli/verus
+DEFAULT_FEE=0.0001
+
+if [ ! -x $VERUS ]; then
+    echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS in the config file to an accurate path to the Verus CLI RPC executable."
+    exit 1
+fi

@@ -6,16 +6,13 @@
 
 #This script will list all received memos (messages) for the supplied address.
 
-VERUS=~/verus-cli/verus
-
-if [ ! -x $VERUS ]; then
-        echo "It looks like $VERUS doesn't exist, or isn't executable. Edit the value of VERUS on line 3 to reflect an accurate path to the Verus CLI RPC executable."
-        exit 1
+if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
+    echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
+    exit 1
 fi
 
 #Check for xxd dependency
-xxd --version &> /dev/null
-if [ $? -eq 127 ]; then
+if ! command -v xxd &> /dev/null ; then
     echo "Please install xxd (a command-line hex-editor)"
     exit 1
 fi
