@@ -5,8 +5,9 @@
 #Mined coinbases can now stake without having been shielded. Shielded coinbases still aren't able to stake until they've at least been spent to a normal TX.
 #This script looks for unspent minted (staked) coinbases and spends them back to the same address. If there are multiple on an address, this consolidates them into one output. Privacy is preserved because this doesn't comingle any addresses. Furthermore, the option is given to allow for a random delay of 5 to 15 minutes between transaction submissions, so the transactions don't show up as a burst, but are metered over time, likely no more than one per block.
 
-#Usage: ./stakepusher.sh [false]
+#Usage: ./VRSCpusher.sh [false] [target-address]
 #1st arg is either "false" or anything else (or omitted). Unless false is given, a delay is used between addresses to increase privacy. If false is passed, all actions will be performed without delay, finishing quickly, but also creating the possibility of correlating the addresses based on time.
+#2nd arg is the (optional) target address, in case you want to consolidate your rewards on a single address.
 #You might also consider setting this up as a cronjob to execute automatically
 
 if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
@@ -37,6 +38,9 @@ else
 	USEDELAY=true
 fi
 
+TARGET=$2
+
+
 #listunspent, filter for generated true
 $VERUS listunspent 1 $CONFS | jq -cr '.[]|select(.generated==true)|.address+"\t"+(.confirmations|tostring)+"\t"+.txid+"\t"+(.vout|tostring)+"\t"+(.amount|tostring)' | \
 	while read L; do
@@ -57,30 +61,30 @@ for F in `ls -1A $DB`; do
 	ADDR="$F"
 	INPUTS='['
 	AMOUNT=0
-
+	
 	while read L; do
 		#build transaction inputs
 		TXID=$(awk '{print $3}' <<<"$L")
 		VOUT=$(awk '{print $4}' <<<"$L")
-		INPUTS="$INPUTS{\"txid\":\"$TXID\",\"vout\":$VOUT},"
+		INPUTS="$INPUTS{\"txid\":\"$TXID\",\"vout\":$VOUT},"	
 
 		INAMOUNT=$(awk '{print $5}' <<<"$L")
 		AMOUNT=$(bc<<<"$AMOUNT+$INAMOUNT")
 	done < "$DB/$F"
 	INPUTS="${INPUTS%,}]"
 
+    #set a default value if target address is null
+    TARGETADDRESS=${TARGET:-$$ADDR}
+
 	#build transaction output
 	OUTAMOUNT=$(bc<<<"$AMOUNT-$DEFAULT_FEE")
-	OUTPUT="{\"RTeMisi9bDjPU357FKJHi7YW3noZzJvusT\":$OUTAMOUNT}"
+	OUTPUT="{\"$TARGETADDRESS\":$OUTAMOUNT}"
 
-	#Display info for debugging (dfisabled)
-	NOW=$(date +"%b %d %H:%M:%S")
-	echo "$NOW   \"shieldingValue\": $OUTAMOUNT"
 	#echo "ADDRESS: $ADDR"
 	#echo "INPUTS: $INPUTS"
 	#echo "OUTPUT: $OUTPUT"
 
-	#echo "Consolidating and moving $OUTAMOUNT on address $ADDR"
+	echo "Consolidating and moving $OUTAMOUNT on address $ADDR"
 
 	#createrawtransaction
 	TXHEX="$($VERUS createrawtransaction "$INPUTS" "$OUTPUT")"
@@ -88,11 +92,11 @@ for F in `ls -1A $DB`; do
 	SIGNEDTXHEX="$($VERUS signrawtransaction "$TXHEX" | jq -r '.hex')"
 	#sendrawtransaction
 	SENTTXID="$($VERUS sendrawtransaction "$SIGNEDTXHEX")"
-    #echo "TXID: $SENTTXID"
+    echo "TXID: $SENTTXID"
 
 	if [ "$USEDELAY" ]; then
 		DELAY=$((300+RANDOM%600))
-		date +"%Y-%m-%d %T"
+		date
 		echo "Using delay for privacy - sleeping $DELAY seconds"
 		sleep $DELAY
 	fi
@@ -100,4 +104,4 @@ done
 
 rm -rf "$DB"
 
-#echo "Stake push completed"
+echo "Stake push completed"
