@@ -48,6 +48,12 @@ Presents a nicely structured and pretty-printed json output of current balance i
 
 I have this set as an entry in my .profile on a number of staking systems so the balance is presented on login.
 
+## spendutxos.sh
+Simple wrapper script that automates the signing and broadcasting of a transaction built from a list of input UTXOs (TXID/VOUT) and a list of outputs (addresses/amounts). Be careful to do your math correctly, whatever portion of the sum of the inputs you don't spend to outputs becomes your fee, so it's very easy to send much more than you intend to the miners/stakers. Useage is basically the same as the RPC command createrawtransaction, it just also signs and broadcasts it for you.
+
+## spendsingleutxo.sh
+Spend a single, specific UTXO to a given address, minus the fee. Specify the UTXO TXID and VOUT, and the address to send to. Uses spendutxos.sh to do most of the work.
+
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
 ### simple-staker.sh
