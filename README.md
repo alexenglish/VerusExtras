@@ -38,6 +38,7 @@ Fetches the crurent CoinGecko VRSC price. Takes an optional argument for the cur
 Fetch a recent bootstrap file with blockchain data to get up and running quickly on a new install or fix a broken instance without re-syncing the whole chain.
 
 ## listaddressbalances.sh
+<<<<<<< HEAD
 List the balance for all addresses that have one, as determined through results of listunspent from the RPC. Tab delimited for easy use in scripting.
 
 ## VRSC-bootstrap-win.bat
@@ -54,6 +55,9 @@ Adaptation of chunksend.sh, to send the entire balance of a z- or i-address. It 
 
 ## VRSCpusher.sh
 Adaptation of stakepusher.sh. Allows to specify a target address at the command line to consolidate on a different address. 
+=======
+List the balance for all addresses that have one, as determined through results of listunspent from the RPC. Tab delimited for easy use in scripting. 
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
 
 ## stakepusher.sh
 Finds unspent minted (staked) coinbases and spends them forward to the same address to allow them to stake. Preserves privacy by not comingling addresses, and optionally allows the use of a delay to reduce the chances of time-correlation.
@@ -63,6 +67,21 @@ Presents a nicely structured and pretty-printed json output of current balance i
 
 I have this set as an entry in my .profile on a number of staking systems so the balance is presented on login.
 
+<<<<<<< HEAD
+=======
+## spendutxos.sh
+Simple wrapper script that automates the signing and broadcasting of a transaction built from a list of input UTXOs (TXID/VOUT) and a list of outputs (addresses/amounts). Be careful to do your math correctly, whatever portion of the sum of the inputs you don't spend to outputs becomes your fee, so it's very easy to send much more than you intend to the miners/stakers. Useage is basically the same as the RPC command createrawtransaction, it just also signs and broadcasts it for you.
+
+## spendsingleutxo.sh
+Spend a single, specific UTXO to a given address, minus the fee. Specify the UTXO TXID and VOUT, and the address to send to. Uses spendutxos.sh to do most of the work.
+
+## doeachblock.sh
+Pass a command and its arguments as arguments to doeachblock.sh and it will execute once each time a new block is found, at a maximum of once a second.
+
+## waitforblockheight.sh
+Blocks execution (waits/sleeps) until the specified block height is reached. Does nothing on its own other than wait, so it's best used in conjunction with another command, separated by ; or &&.
+
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
 ### simple-staker.sh
@@ -70,6 +89,9 @@ Simple staker shields coinbases to a private address, then moves available priva
 
 Deprecated because shielding and unshielding is no longer required and is known to reduce privacy by correlating addresses. Mined coinbases can now be spent or staked directly. Minted (staked) coinbases can be spent directly, but not staked - please see stakepusher.sh for an option to consolidate and spend minted coinbases so they're stakeable.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
 ## Misc Notes
 If you're working with wallet files, particularly dumps containing plain-text private keys, I highly recommend [tomb](https://www.dyne.org/software/tomb/) for keeping your work safe.

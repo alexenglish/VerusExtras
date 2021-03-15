@@ -32,7 +32,7 @@ fi
 ######Recipient
 RCPT=$1
 #test for correct length of recipient address string
-if [ "${#RCPT}" -ne 95 ]; then
+if [ "${#RCPT}" -ne 78 ]; then
     echo Recipient address is not the correct length
     usage
     exit 1
@@ -48,7 +48,7 @@ if [ -z "$MSG" ]; then
     exit 2
 fi
 
-MSGHEX=$(xxd -pu <<< "$MSG")
+MSGHEX=$(xxd -pu <<< "$MSG" | tr -d \\n | sed '$a\')
 #test for correct byte length of message string
 if [ "${#MSGHEX}" -gt 1024 ]; then
     echo Message is too long, must be 512 bytes or less.
@@ -72,7 +72,7 @@ fi
 ######From
 FROM=""
 if [ $# -ge 5 ]; then
-    if [ "${#$5}" -ne 95 ]; then
+    if [ "${#$5}" -ne 78 ]; then
         echo The From address does is not the right length.
         usage
         exit 5
