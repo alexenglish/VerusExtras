@@ -57,12 +57,20 @@ for F in `ls -1A $DB`; do
 	ADDR="$F"
 	INPUTS='['
 	AMOUNT=0
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
 	while read L; do
 		#build transaction inputs
 		TXID=$(awk '{print $3}' <<<"$L")
 		VOUT=$(awk '{print $4}' <<<"$L")
+<<<<<<< HEAD
 		INPUTS="$INPUTS{\"txid\":\"$TXID\",\"vout\":$VOUT},"
+=======
+		INPUTS="$INPUTS{\"txid\":\"$TXID\",\"vout\":$VOUT},"	
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
 
 		INAMOUNT=$(awk '{print $5}' <<<"$L")
 		AMOUNT=$(bc<<<"$AMOUNT+$INAMOUNT")
@@ -71,16 +79,25 @@ for F in `ls -1A $DB`; do
 
 	#build transaction output
 	OUTAMOUNT=$(bc<<<"$AMOUNT-$DEFAULT_FEE")
+<<<<<<< HEAD
 	OUTPUT="{\"RTeMisi9bDjPU357FKJHi7YW3noZzJvusT\":$OUTAMOUNT}"
 
 	#Display info for debugging (dfisabled)
 	NOW=$(date +"%b %d %H:%M:%S")
 	echo "$NOW   \"shieldingValue\": $OUTAMOUNT"
+=======
+	OUTPUT="{\"$ADDR\":$OUTAMOUNT}"
+
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
 	#echo "ADDRESS: $ADDR"
 	#echo "INPUTS: $INPUTS"
 	#echo "OUTPUT: $OUTPUT"
 
+<<<<<<< HEAD
 	#echo "Consolidating and moving $OUTAMOUNT on address $ADDR"
+=======
+	echo "Consolidating and moving $OUTAMOUNT on address $ADDR"
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
 
 	#createrawtransaction
 	TXHEX="$($VERUS createrawtransaction "$INPUTS" "$OUTPUT")"
@@ -88,11 +105,19 @@ for F in `ls -1A $DB`; do
 	SIGNEDTXHEX="$($VERUS signrawtransaction "$TXHEX" | jq -r '.hex')"
 	#sendrawtransaction
 	SENTTXID="$($VERUS sendrawtransaction "$SIGNEDTXHEX")"
+<<<<<<< HEAD
     #echo "TXID: $SENTTXID"
 
 	if [ "$USEDELAY" ]; then
 		DELAY=$((300+RANDOM%600))
 		date +"%Y-%m-%d %T"
+=======
+    echo "TXID: $SENTTXID"
+
+	if [ "$USEDELAY" ]; then
+		DELAY=$((300+RANDOM%600))
+		date
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
 		echo "Using delay for privacy - sleeping $DELAY seconds"
 		sleep $DELAY
 	fi
@@ -100,4 +125,8 @@ done
 
 rm -rf "$DB"
 
+<<<<<<< HEAD
 #echo "Stake push completed"
+=======
+echo "Stake push completed"
+>>>>>>> 90380b938ac5c57373afdee73968654d627f27bf
