@@ -17,7 +17,7 @@ if ! command -v jq > /dev/null ; then
 	exit 1
 fi
 
-printf "\n%-78s %17s \n" Address Balance
+printf "\e[33m%-78s %17s \e[0m\n" Address Balance
 printf "%78s %17s \n" ------------------------------------------------------------------------------ -----------------
 $VERUS listunspent 0 999999999 | jq -cr '.[]|[.address,.amount]' | tr -d '[]"' | tr ',' "\t" | awk '{x[$1]+=$2*1.0} END {for (key in x) { printf "%s %17.8f \n", key, x[key] }}' | while read L; do
 	ADDR="$(awk '{print $1}'<<<"$L")"
@@ -33,7 +33,7 @@ $VERUS listunspent 0 999999999 | jq -cr '.[]|[.address,.amount]' | tr -d '[]"' |
 		ADDR="$($VERUS getidentity "$ADDR" | jq -r '.identity.name')@"
 	fi
 
-	printf "%-78s %17.8f\n" "$ADDR" $AMT
+	printf "\e[36m%-78s \e[33m%17.8f\e[0m\n" "$ADDR" $AMT
 done | column -s : -t
-$VERUS z_listunspent 0 999999999 | jq -cr '.[]|[.address,.amount]' | tr -d '[]"' | tr ',' "\t" | awk '{x[$1]+=$2} END {for (key in x) { printf "%-78s %17.8f \n", key, x[key] }}'
+$VERUS z_listunspent 0 999999999 | jq -cr '.[]|[.address,.amount]' | tr -d '[]"' | tr ',' "\t" | awk '{x[$1]+=$2} END {for (key in x) { printf "\33[36m%-78s \33[33m%17.8f\33[0m\n", key, x[key] }}'
 printf "%78s %17s \n\n" ------------------------------------------------------------------------------ -----------------
