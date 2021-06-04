@@ -57,6 +57,9 @@ Blocks execution (waits/sleeps) until the specified block height is reached. Doe
 ## waitforverusdexit.sh
 Blocks execution (waits/sleeps) until no more instances of verusd are running. Useful when scripting processes that require shutting down verusd. This will wait for any and all instances regardless of their parameters, so testnet, PBaaS chains, etc., will also keep it from exiting.
 
+## sweepaddres.sh
+Sweeps all funds from an address to another address, less a transaction fee. First argument is the address to sweep, second address is the destination. The funds are all sent in a single transaction and generate a single UTXO (not chunked for staking considerations, etc.).
+
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
 ### simple-staker.sh
