@@ -54,6 +54,9 @@ Pass a command and its arguments as arguments to doeachblock.sh and it will exec
 ## waitforblockheight.sh
 Blocks execution (waits/sleeps) until the specified block height is reached. Does nothing on its own other than wait, so it's best used in conjunction with another command, separated by ; or &&.
 
+## waitforverusdexit.sh
+Blocks execution (waits/sleeps) until no more instances of verusd are running. Useful when scripting processes that require shutting down verusd. This will wait for any and all instances regardless of their parameters, so testnet, PBaaS chains, etc., will also keep it from exiting.
+
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
 ### simple-staker.sh
