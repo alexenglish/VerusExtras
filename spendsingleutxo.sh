@@ -15,8 +15,6 @@ if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
     exit 1
 fi
 
-VEPATH="$( dirname "${BASH_SOURCE[0]}" )"
-
 #Dependencies: jq (command-line json parser/editor), bc (command-line calculator)
 if ! command -v jq &>/dev/null ; then
     echo "jq not found. please install using your package manager."
