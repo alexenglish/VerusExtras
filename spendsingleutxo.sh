@@ -15,6 +15,8 @@ if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
     exit 1
 fi
 
+VEPATH="$( dirname "${BASH_SOURCE[0]}" )"
+
 #Dependencies: jq (command-line json parser/editor), bc (command-line calculator)
 if ! command -v jq &>/dev/null ; then
     echo "jq not found. please install using your package manager."
@@ -37,7 +39,7 @@ fi
 set -e
 
 #determine the amount
-AMT="$(./fetchtx.sh "$1" | jq -r ".vout[] | select(.n==$2).value")"
+AMT="$($VEPATH/fetchtx.sh "$1" | jq -r ".vout[] | select(.n==$2).value")"
 #This will willingly send 0 VRSC if the UTXO is 0.0001 VRSC
 if [ "$(bc<<<"$AMT<$FEE")" -gt 0 ]; then
     echo "UTXO is smaller than the standard transaction fee, not going to send."
