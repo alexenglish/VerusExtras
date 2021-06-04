@@ -22,9 +22,6 @@ Getmessages lists memo fields of all transactions received at a particular priva
 ## chunksend.sh
 Send funds to the specified address in separate transactions of the desired size - useful for managing the size of UTXOs, such as for staking.
 
-## decodeunlockheight.py
-Takes the script hex for a timelocked transaction and returns the block number at which that TX will unlock.
-
 ## fetchtx.sh
 Takes a TXID as the first argument and returns full TX data, including for transactions that aren't associated with addresses in the local wallet. This is just a wrapper for RPC functions.
 
@@ -39,9 +36,6 @@ Fetch a recent bootstrap file with blockchain data to get up and running quickly
 
 ## listaddressbalances.sh
 List the balance for all addresses that have one, as determined through results of listunspent from the RPC. Tab delimited for easy use in scripting. 
-
-## stakepusher.sh
-Finds unspent minted (staked) coinbases and spends them forward to the same address to allow them to stake. Preserves privacy by not comingling addresses, and optionally allows the use of a delay to reduce the chances of time-correlation.
 
 ## integratedbalance.sh
 Presents a nicely structured and pretty-printed json output of current balance information, combining the output of getwalletinfo and z_gettotalbalance to present these balances: transparent, unconfirmed, immature, private, and total (all combined). Also presents private balance as a number, rather than text, unlike z_gettotalbalance.
@@ -66,6 +60,12 @@ Scripts that are no longer recommended or are less relevant
 Simple staker shields coinbases to a private address, then moves available private address balances to public addresses (randomly selected from those available, creating new addresses if necessary) for staking. This script can be run manually, set up as a cron job, or used with the blocknotify parameter to execute every X blocks (not recommended if you're still syncing the chain).
 
 Deprecated because shielding and unshielding is no longer required and is known to reduce privacy by correlating addresses. Mined coinbases can now be spent or staked directly. Minted (staked) coinbases can be spent directly, but not staked - please see stakepusher.sh for an option to consolidate and spend minted coinbases so they're stakeable.
+
+## decodeunlockheight.py
+Takes the script hex for a timelocked transaction and returns the block number at which that TX will unlock. This is no longer relevant on the Verus Chain because all of the initial rewards have unlocked long ago.
+
+## stakepusher.sh
+Finds unspent minted (staked) coinbases and spends them forward to the same address to allow them to stake. Preserves privacy by not comingling addresses, and optionally allows the use of a delay to reduce the chances of time-correlation. Now deprecated because this is no longer a requirement for staking coinbases.
 
 ## Misc Notes
 If you're working with wallet files, particularly dumps containing plain-text private keys, I highly recommend [tomb](https://www.dyne.org/software/tomb/) for keeping your work safe.
