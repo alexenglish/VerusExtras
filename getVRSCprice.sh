@@ -26,3 +26,4 @@ else
 fi
 
 curl -X GET "https://api.coingecko.com/api/v3/simple/price?ids=verus-coin&vs_currencies=$VS" -H "accept: application/json"
+printf '\n'
