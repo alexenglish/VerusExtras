@@ -64,7 +64,7 @@ Simple wrapper script that automates the signing and broadcasting of a transacti
 Spend a single, specific UTXO to a given address, minus the fee. Specify the UTXO TXID and VOUT, and the address to send to. Uses spendutxos.sh to do most of the work.
 
 ### sweepaddres.sh
-Sweeps all funds from an address to another address, less a transaction fee. First argument is the address to sweep, second address is the destination. The funds are all sent in a single transaction and generate a single UTXO (not chunked for staking considerations, etc.).
+Sweeps all funds from an address to another address, less a transaction fee. First argument is the address to sweep, second address is the destination. The funds are all sent in a single transaction and generate a single UTXO (not chunked for staking considerations, etc.). Any address can be used for the source or destination - a private address, transparent address, or an ID referenced by i-address or name (with @); if using an ID name, make sure to use quotes if it contains any whitespace or non-alphanumeric characters to be safe, especially on the destination.
 
 ## Transaction Data
 
