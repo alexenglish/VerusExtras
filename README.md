@@ -74,6 +74,9 @@ Takes a TXID as the first argument and returns full TX data, including for trans
 ### fetchutxos.sh
 Takes an address as the first argument and returns all UTXOs for that address. Just used to simplify syntax of the corresponding RPC call.
 
+### findsmallutxos.sh
+Lists the number of UTXOs below the specified size for each address on which there are any. The size is optionally specified as the first(only) argument, and defaults to 5000.
+
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
 ### simple-staker.sh
