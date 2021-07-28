@@ -15,10 +15,15 @@ if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
     exit 1
 fi
 
-#depends on jq
+#depends on jq and bc
 if ! command -v jq > /dev/null ; then
 	echo "jq not installed - please install jq, command line json tool"
 	exit 1
+fi
+
+if ! command -v bc &>/dev/null ; then
+    echo "bc not found. please install using your package manager."
+    exit 1
 fi
 
 cols () {
