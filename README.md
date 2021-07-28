@@ -69,6 +69,9 @@ Spend a single, specific UTXO to a given address, minus the fee. Specify the UTX
 ### sweepaddres.sh
 Sweeps all funds from an address to another address, less a transaction fee. First argument is the address to sweep, second address is the destination. The funds are all sent in a single transaction and generate a single UTXO (not chunked for staking considerations, etc.). Any address can be used for the source or destination - a private address, transparent address, or an ID referenced by i-address or name (with @); if using an ID name, make sure to use quotes if it contains any whitespace or non-alphanumeric characters to be safe, especially on the destination.
 
+### utxodefrag.sh
+Spend all the funds (and all UTXOs) on an address back to the same address in chunks. The first argument is the address, which may be an R-address, an i-address, or an ID name (with @). The optional second argument is the chunk size, which defaults to 5000
+
 ## Transaction Data
 
 ### fetchtx.sh
