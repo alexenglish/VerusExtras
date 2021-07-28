@@ -7,7 +7,7 @@
 #The first argument is the number of transactions to view - it defaults to 100
 #If any value is set for the second argument it will create tab-delimited output intended for processing with other scripts or importing into spreadsheets
 
-NUM=${1-100}
+NUM=${1-32}
 SCRIPT=${2-}
 
 if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
