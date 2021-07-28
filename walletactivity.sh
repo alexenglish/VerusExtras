@@ -50,14 +50,17 @@ $VERUS listtransactions "*" $NUM | jq -c '.[]' | while read T; do
 	AMOUNT="$(jq -r '.amount' <<<"$T")"
 	ADDR="$(jq -r '.address' <<<"$T")"
 	BLOCKHASH="$(jq -r '.blockhash' <<<"$T")"
+	CONFIRMATIONS="$(jq -r '.confirmations' <<<"$T")"
 
 	#use block time rather than tx time
         #the block time is immutable and tx time may be reported as when it was scanned
 	if [ "$BLOCKHASH" != "null" ] && [ -n $BLOCKHASH ]; then
-		TIME="$(date -d @$($VERUS getblock $BLOCKHASH | jq -r '.time') +"%a_%d_%b_%Y-%H:%M:%S")"
+		TIME="$($VERUS getblock $BLOCKHASH | jq -r '.time')"
 	else
-		TIME="$(date -d @$(jq -r '.time' <<<"$T") +"%a_%d_%b_%Y-%H:%M:%S")"
+		TIME="$(jq -r '.time' <<<"$T")"
 	fi
+
+	HUMANTIME="$(date -d @$TIME +"%a_%d_%b_%Y-%H:%M:%S")"
 
 	#resolve ID names for addresses
 	if [ "${ADDR:0:1}" == "i" ]; then
@@ -65,14 +68,17 @@ $VERUS listtransactions "*" $NUM | jq -c '.[]' | while read T; do
 	fi
 
 	#check for orphans to apply color and label
-	if [ "$(jq -r '.confirmations' <<<"$T")" == "-1" ]; then
-		ORPHAN="Orphan/Invalid"
+	if [ "$CONFIRMATIONS" == "-1" ]; then
+		STATUS="Orphan/Invalid"
 	       	COLOR=$RED
+	elif [ "$CONFIRMATIONS" == "0" ]; then
+		STATUS="Unconfirmed"
+		COLOR=$CYAN
         else
             if [ -z "$SCRIPT" ]; then
-                ORPHAN="."
+                STATUS="."
             else
-                ORPHAN="VALID"
+                STATUS="VALID"
             fi
 		unset COLOR
 	fi
@@ -84,41 +90,41 @@ $VERUS listtransactions "*" $NUM | jq -c '.[]' | while read T; do
 			fi
 			AMOUNT=${AMOUNT#-}
             if [ -z "$SCRIPT" ]; then
-                printf "${COLOR:-$YELLOW}$TIME\tStaked\t$AMOUNT\tOn\t$ADDR\n"
+                printf "${COLOR:-$YELLOW}$HUMANTIME\tStaked\t$AMOUNT\tOn\t$ADDR\n"
             else
-                printf "$TIME\tStaked\t$ORPHAN\t$AMOUNT\t$ADDR\t$TXID\n"
+                printf "$TIME\tStaked\t$STATUS\t$CONFIRMATIONS\t$AMOUNT\t$ADDR\t$TXID\n"
             fi
 			;;
 
 		mint)
             if [ -z "$SCRIPT" ]; then
-                printf "${COLOR:-$GREEN}$TIME\tMinted\t$AMOUNT\tTo\t$ADDR\n"
+                printf "${COLOR:-$GREEN}$HUMANTIME\tMinted\t$AMOUNT\tTo\t$ADDR\n"
             else
-                printf "$TIME\tMinted\t$ORPHAN\t$AMOUNT\t$ADDR\t$TXID\n"
+                printf "$TIME\tMinted\t$STATUS\t$CONFIRMATIONS\t$AMOUNT\t$ADDR\t$TXID\n"
             fi
 			;;
 
 		immature)
             if [ -z "$SCRIPT" ]; then
-                printf "${COLOR:-$GREEN}$TIME\tImmature\t$AMOUNT\tTo\t$ADDR\n"
+                printf "${COLOR:-$GREEN}$HUMANTIME\tImmature\t$AMOUNT\tTo\t$ADDR\n"
             else
-                printf "$TIME\tImmature\t$ORPHAN\t$AMOUNT\t$ADDR\t$TXID\n"
+                printf "$TIME\tImmature\t$STATUS\t$CONFIRMATIONS\t$AMOUNT\t$ADDR\t$TXID\n"
             fi
 			;;
 
 		generate)
             if [ -z "$SCRIPT" ]; then
-                printf "${COLOR:-$GREEN}$TIME\tMined\t$AMOUNT\tTo\t$ADDR\n"
+                printf "${COLOR:-$GREEN}$HUMANTIME\tMined\t$AMOUNT\tTo\t$ADDR\n"
             else
-                printf "$TIME\tMined\t$ORPHAN\t$AMOUNT\t$ADDR\t$TXID\n"
+                printf "$TIME\tMined\t$STATUS\t$CONFIRMATIONS\t$AMOUNT\t$ADDR\t$TXID\n"
             fi
 			;;
 
 		receive)
             if [ -z "$SCRIPT" ]; then
-                printf "${COLOR:-$BLUE}$TIME\tReceived\t$AMOUNT\tAt\t$ADDR\n"
+                printf "${COLOR:-$BLUE}$HUMANTIME\tReceived\t$AMOUNT\tAt\t$ADDR\n"
             else
-                printf "$TIME\tReceived\t$ORPHAN\t$AMOUNT\t$ADDR\t$TXID\n"
+                printf "$TIME\tReceived\t$STATUS\t$CONFIRMATIONS\t$AMOUNT\t$ADDR\t$TXID\n"
             fi
 			;;
 
@@ -131,23 +137,23 @@ $VERUS listtransactions "*" $NUM | jq -c '.[]' | while read T; do
 
 			if [ "$NAME" != "null" ] && [ -n "$NAME" ]; then
 				#is a name registration
-                if [ -z "$SCRIPT" ]; then
-                    printf "${COLOR:-$PURPLE}$TIME\tNameReg\t$AMOUNT\tName\t$NAME@\n"
-                else
-                    printf "$TIME\tNameReg\t$ORPHAN\t$AMOUNT\t$NAME@\t$TXID\n"
-                fi
+				if [ -z "$SCRIPT" ]; then
+				    printf "${COLOR:-$PURPLE}$HUMANTIME\tNameReg\t$AMOUNT\tName\t$NAME@\n"
+				else
+				    printf "$TIME\tNameReg\t$STATUS\t$CONFIRMATIONS\t$AMOUNT\t$NAME@\t$TXID\n"
+				fi
 			elif [ "$ADDR" == "null" ]; then
-                if [ -z "$SCRIPT" ]; then
-                    printf "${COLOR:-$ORANGE}$TIME\tSent\t$AMOUNT\tTo\tPrivateAddress(Probably)\n"
-                else
-                    printf "$TIME\tSent\t$ORPHAN\t$AMOUNT\tPrivateAddress\t$TXID\n"
-                fi
+				if [ -z "$SCRIPT" ]; then
+				    printf "${COLOR:-$ORANGE}$HUMANTIME\tSent\t$AMOUNT\tTo\tPrivateAddress(Probably)\n"
+				else
+				    printf "$TIME\tSent\t$STATUS\t$CONFIRMATIONS\t$AMOUNT\tPrivateAddress\t$TXID\n"
+				fi
 			else
-                if [ -z "$SCRIPT" ]; then
-                    printf "${COLOR:-$ORANGE}$TIME\tSent\t$AMOUNT\tTo\t$ADDR\n"
-                else
-                    printf "$TIME\tSent\t$ORPHAN\t$AMOUNT\t$ADDR\t$TXID\n"
-                fi
+				if [ -z "$SCRIPT" ]; then
+				    printf "${COLOR:-$ORANGE}$HUMANTIME\tSent\t$AMOUNT\tTo\t$ADDR\n"
+				else
+				    printf "$TIME\tSent\t$STATUS\t$CONFIRMATIONS\t$AMOUNT\t$ADDR\t$TXID\n"
+				fi
 			fi
 			;;
 
@@ -157,6 +163,6 @@ $VERUS listtransactions "*" $NUM | jq -c '.[]' | while read T; do
 	esac
 
     if [ -z "$SCRIPT" ]; then
-        printf "$ORPHAN\t.\t.\tTXID\t$TXID$NOFORMAT\n"
+        printf "$STATUS\tConfs\t$CONFIRMATIONS\tTXID\t$TXID$NOFORMAT\n"
     fi
 done | cols $COLS
