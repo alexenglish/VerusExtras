@@ -41,6 +41,9 @@ Presents a nicely structured and pretty-printed json output of current balance i
 
 I have this set as an entry in my .profile on a number of staking systems so the balance is presented on login.
 
+### walletactivity.sh
+Shows recent wallet transactions printed in an easy-to-read columnized format, with color coding. There are two optional arguments. The first is the number of transactions to view - the default is 100. The second will create output intended for script parsing if there is any value - colors will be dropped and the output will be plain tab-delimited without column formatting. 
+
 ## Scripting Control
 
 ### doeachblock.sh
