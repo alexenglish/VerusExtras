@@ -20,4 +20,4 @@ if ! command -v jq > /dev/null ; then
 	exit 1
 fi
 
-$VERUS listunspent | jq -r '.[]|select(.amount<'"$SIZE"')|select(.amount>0)|[.address,.amount|tostring]|join(" ")' | awk '{ADDR[$1]+=1} END {for (key in ADDR) { print key" "ADDR[key] }}'
+$VERUS listunspent | jq -r '.[]|select(.amount<'"$SIZE"')|select(.amount>0)|[.address,.amount|tostring]|join(" ")' | awk '{ADDR[$1]+=1} END {for (key in ADDR) { print ADDR[key]" "key }}' | sort -n | column -t
