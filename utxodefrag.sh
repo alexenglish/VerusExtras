@@ -30,7 +30,7 @@ CHUNK=${2-5000}
 AC=${#ADDR}
 
 if [ "${ADDR:AC-1:1}" != "@" ] && ( [ "$AC" -ne 34 ] || ( [ "${ADDR:0:1}" != "R" ] && [ "${ADDR:0:1}" != "i" ] )) ; then
-	echo "The address given is not valid or not supported." >&2
+	echo "Missing address or the address given is not valid or not supported." >&2
 	echo "Supported address types are:" >&2
 	echo "	Transparent addresses (R-addresses)" >&2
 	echo "	Identity addresses (i-addresses)" >&2
