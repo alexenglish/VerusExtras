@@ -37,7 +37,7 @@ fi
 set -e
 
 #determine the amount
-AMT="$(./fetchtx.sh "$1" | jq -r ".vout[] | select(.n==$2).value")"
+AMT="$($VEPATH/fetchtx.sh "$1" | jq -r ".vout[] | select(.n==$2).value")"
 #This will willingly send 0 VRSC if the UTXO is 0.0001 VRSC
 if [ "$(bc<<<"$AMT<$FEE")" -gt 0 ]; then
     echo "UTXO is smaller than the standard transaction fee, not going to send."
