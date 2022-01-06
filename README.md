@@ -38,7 +38,7 @@ Fetches the crurent CoinGecko VRSC price. Takes an optional argument for the cur
 Fetch a recent bootstrap file with blockchain data to get up and running quickly on a new install or fix a broken instance without re-syncing the whole chain.
 
 ## listaddressbalances.sh
-List the balance for all addresses that have one, as determined through results of listunspent from the RPC. Tab delimited for easy use in scripting. 
+List the balance for all addresses that have one, as determined through results of listunspent from the RPC. Tab delimited for easy use in scripting.
 
 ## stakepusher.sh
 Finds unspent minted (staked) coinbases and spends them forward to the same address to allow them to stake. Preserves privacy by not comingling addresses, and optionally allows the use of a delay to reduce the chances of time-correlation.
@@ -59,6 +59,9 @@ Pass a command and its arguments as arguments to doeachblock.sh and it will exec
 
 ## waitforblockheight.sh
 Blocks execution (waits/sleeps) until the specified block height is reached. Does nothing on its own other than wait, so it's best used in conjunction with another command, separated by ; or &&.
+
+## consolidate.sh
+Looks for unspent transactions below the supplied limit (if none supplied smaller than 2500) and spends them back to the same address. If there are multiple UTXOs on an address, this consolidates them into one output.
 
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
