@@ -20,13 +20,10 @@ VERUS="$VERUS $VERUSARGS"
 #provides the path to the script executed so the script can find relative paths to other VE scripts
 VEPATH="$( dirname "${BASH_SOURCE[0]}" )"
 
+source "$VEPATH/common"
+
 ID_Z=
 ID_T=
 ID_REFERRER="Verus Coin Foundation@"
 ID_RECOVERY=
 ID_REVOCATION=
-
-function message ()
-{
-    echo "$1" 1>&2
-}

@@ -1,0 +1,4 @@
+function message ()
+{
+    echo "$1" 1>&2
+}

@@ -5,7 +5,7 @@ All of these scripts have been at least lightly tested, but come with no warrant
 
 See comments at the top of each script for usage information.
 
-**Important:** Update the config file (named 'config') with the path to your Verus CLI RPC executable and optionally any parameters you want to call the verus RPC client with, such as -chain=vrsctest for working on testnet. Some scripts depend on bc (command-line calculator), jq (command-line json parser, constructor, pretty-printer), or xxd (command-line hex-dumps and reverse hex-dumps).
+**Important:** The config file in this repo is now named config.example, which will allow you to easily pull updates to the repo without worrying about any changes to your config file. To use the tools in this repo you'll need to copy config.example to config and make any customizations needed. The most common item that needs to be updated is the path you your Verus CLI RPC executable (verus) and optionally any parameters you want to call the verus RPC client with, such as -chain=vrsctest for working on testnet. Some scripts depend on bc (command-line calculator), jq (command-line json parser, constructor, pretty-printer), or xxd (command-line hex-dumps and reverse hex-dumps), you should get notices about these if you try to run scripts that depend on them but can't find them.
 
 ## Environment
 
@@ -69,6 +69,15 @@ Returns the average block time in seconds for the last N blocks where N is the f
 Finds the date/time of a past block height, or makes a reasonable guess about when a future block height will occur.
 
 The first argument is the target block height. The optional second argument will increase verbosity if set (to any value).
+
+### stakingminingratio.sh
+Returns the number of mined blocks and staked blocks out of the last N, as well as the ratio between the two.
+
+### timesincelastblock.sh
+Provides information about the time since the last block. This was developed with the intention that it would be useful as a frequently updated monitor, such as running it with `watch -n1 ./timesincelastblock.sh`.
+
+### targetheight.sh
+Given a UNIX-epoch-formatted timestamp (the first and only argument), estimate the block height at that time.
 
 ## Sending/Spending
 
