@@ -23,7 +23,7 @@ Fetches the crurent CoinGecko VRSC price. Takes an optional argument for the cur
 ### fetchbootstrap.sh
 Fetch a recent bootstrap file with blockchain data to get up and running quickly on a new install or fix a broken instance without re-syncing the whole chain.
 
-## Messaging
+## Private Messaging
 
 ### sendmessage.sh
 Sendmessage will send an encrypted private message using the memo field of a private transaction. It costs a fee to send, and sends a small amount of Verus to the receipient, both of these amounts are configurable.
@@ -55,6 +55,21 @@ Blocks execution (waits/sleeps) until the specified block height is reached. Doe
 ### waitforverusdexit.sh
 Blocks execution (waits/sleeps) until no more instances of verusd are running. Useful when scripting processes that require shutting down verusd. This will wait for any and all instances regardless of their parameters, so testnet, PBaaS chains, etc., will also keep it from exiting.
 
+### waitforblock.sh
+Blocks execution until a new block is found. Because multiple blocks in a row can be found quickly from staking, and because this only checks once per second, this cannot be used to guarantee only one block has passed by the time execution resumes.
+
+Typical usage might be something like: `./waitforblock.sh; echo "Found a block."`
+
+## Network Statistics
+
+### avgblocktime.sh
+Returns the average block time in seconds for the last N blocks where N is the first and only argument.
+
+### dateofheight.sh
+Finds the date/time of a past block height, or makes a reasonable guess about when a future block height will occur.
+
+The first argument is the target block height. The optional second argument will increase verbosity if set (to any value).
+
 ## Sending/Spending
 
 ### chunksend.sh
@@ -71,6 +86,11 @@ Sweeps all funds from an address to another address, less a transaction fee. Fir
 
 ### utxodefrag.sh
 Spend all the funds (and all UTXOs) on an address back to the same address in chunks. The first argument is the address, which may be an R-address, an i-address, or an ID name (with @). The optional second argument is the chunk size, which defaults to 5000
+
+## Identities
+
+### identities/vaultcheck.sh
+Call with a list (one or more) of IDs to check as arguments. For each the script will report the ID's vault status - unlocked, time lock, delay lock, or revoked. Make sure to put quotes around ID names containing shell special characters or spaces.
 
 ## Transaction Data
 

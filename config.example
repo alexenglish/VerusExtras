@@ -1,9 +1,11 @@
 #!/bin/bash
 
+#This file should be copied to a file called "config" and modified  to configure for your use.
+
 #source this file in other scripts to set up common variables
 
 #path to verus CLI rpc executable
-VERUS="$HOME/verus-cli/verus"
+VERUS="$HOME/bin/verus"
 VERUSARGS=""
 #VERUSARGS="-chain=VRSCTEST"
 DEFAULT_FEE=0.0001
@@ -23,3 +25,8 @@ ID_T=
 ID_REFERRER="Verus Coin Foundation@"
 ID_RECOVERY=
 ID_REVOCATION=
+
+function message ()
+{
+    echo "$1" 1>&2
+}
