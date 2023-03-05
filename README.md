@@ -49,6 +49,9 @@ Shows recent wallet transactions printed in an easy-to-read columnized format, w
 ### doeachblock.sh
 Pass a command and its arguments as arguments to doeachblock.sh and it will execute once each time a new block is found, at a maximum of once a second.
 
+### doeachmempool.sh
+Pass a command and its arguments as arguments to doeachmempool.sh and it will execute for each mempool TXID found, appending that TXID to the arguments of the command passed. This will not catch all transactions, since some transactions may make it into blocks without reaching your local mempool, and since there is a 100ms delay between queries to keep system resource usage in check and to prevent flooding the verus daemon. You will also receive duplicates in the case where a transaction in your local mempool is not in the next block you receive - this will run your command once per mempool TXID per block.
+
 ### waitforblockheight.sh
 Blocks execution (waits/sleeps) until the specified block height is reached. Does nothing on its own other than wait, so it's best used in conjunction with another command, separated by ; or &&.
 
