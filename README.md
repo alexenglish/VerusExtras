@@ -115,6 +115,11 @@ Takes an address as the first argument and returns all UTXOs for that address. J
 ### findsmallutxos.sh
 Lists the number of UTXOs below the specified size for each address on which there are any. The size is optionally specified as the first(only) argument, and defaults to 5000.
 
+## Wallet Gen
+
+### bip39gen.sh
+Generate a random bip39-compatible seed phrase. Please see comments in file for more detailed information on trust.
+
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
 ### simple-staker.sh
