@@ -118,7 +118,7 @@ Lists the number of UTXOs below the specified size for each address on which the
 ## Wallet Gen
 
 ### bip39gen.sh
-Generate a random bip39-compatible seed phrase. Please see comments in file for more detailed information on trust.
+Generate a random bip39-compatible seed phrase. Please see comments in file for more detailed information on trust. Please take the time to understand how it works so you understand any risks. Use at your own risk! I make no claim of safety, or suitability for any purpose.
 
 ## Deprecated
 Scripts that are no longer recommended or are less relevant
