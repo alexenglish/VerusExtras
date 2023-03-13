@@ -8,9 +8,9 @@
 #autoload -Uz compinit
 #compinit
 
-pushd "${0:a:h}" 
+pushd "${0:a:h}" &>/dev/null
 
-source completion_vars
+source lib/completion_vars
 
 function _verus {
     _arguments -C "1: :($CONTROL $NETWORK $BLOCKCHAIN $CROSSCHAIN $MINING $GENERATING $RAWTRANSACTIONS $ADDRESSINDEX $UTIL $WALLET $DISCLOSURE $PBAAS $IDENTITY $VDXF $MARKETPLACE $MULTICHAIN)"
@@ -18,4 +18,4 @@ function _verus {
 
 compdef _verus verus
 
-popd
+popd &>/dev/null
