@@ -2,3 +2,13 @@ function message ()
 {
     echo "$1" 1>&2
 }
+
+#check for a dependency and exit if not present
+function depcheck ()
+{
+    if ! command -v "$1" > /dev/null ; then
+        message "$1 not installed or not in path - please install"
+        exit 1
+    fi
+}
+
