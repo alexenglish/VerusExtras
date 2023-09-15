@@ -7,11 +7,7 @@
 #To utilze them in Verus you can use `verus convertpassphrase <your word list here>` to generate your address, keys, and wallet-import-format (WIF). The WIF can be added to your verus wallet using `verus importprivkey <WIF>`.
 #This script is only safe if your operating system can provide trustworthy randomness. But the same would apply to any other key generation mechanism.
 #Only the passphrase is printed to STDOUT, so you can pipe or redirect this output and only get the passphrase.
-
-if ! source "$( dirname "${BASH_SOURCE[0]}" )"/config; then
-    echo "Failed to source config file. Please make sure you have the whole VerusExtras repo or at least also have the config file."
-    exit 1
-fi
+WORDLIST="$(dirname "${BASH_SOURCE[0]}")/lib/bip39list.txt"
 
 cat <<EOF 1>&2
 Use with caution - only trust this seed phrase generation if you trust the randomness available on the device you're running it on.
@@ -27,7 +23,7 @@ To use this seed phrase to generate a Verus R-address (and public/private keys),
 EOF
 
 read ENT
-message
+echo 1>&2
 
 #keyboard interrupt timing while typing added to entropy along with all the deeper OS factors - network packet timing, device statuses and IDs, device temperatures, etc.
 # supply the text itself as entropy
@@ -37,7 +33,7 @@ U=3
 #select random words
 #loop until we don't have more than two occurrences of a word in our phrase (this is usually the first time)
 while [ $U -gt 2 ]; do
-	WORDS=$(for N in `seq 1 2048`; do shuf "${VEPATH}/lib/bip39list.txt" --random-source=/dev/random ; done | shuf --random-source=/dev/random | shuf --random-source=/dev/random -n 24)
+	WORDS=$(for N in `seq 1 2048`; do shuf "${WORDLIST}" --random-source=/dev/random ; done | shuf --random-source=/dev/random | shuf --random-source=/dev/random -n 24)
 	U=$(sort <<<"$WORDS" | uniq -c | awk '{print $1}' | sort -n | head -n1)
 done
 
